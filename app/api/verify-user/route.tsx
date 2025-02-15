@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
 		}
 		return NextResponse.json({ result: isUserExist[0] });
 	} catch (error: any) {
-		console.log("error -> ", error);
+		// console.log("error -> ", error);
 		return NextResponse.json({ error: error });
 	}
 }
