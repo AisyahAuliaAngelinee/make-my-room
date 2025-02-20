@@ -26,14 +26,10 @@ export default function Provider({ children }: { children: React.ReactNode }) {
 	 * Verify user
 	 */
 	const VerifyUser = async () => {
-		try {
-			const dataResult = await axios.post("./api/verify-user", {
-				user: user,
-			});
-			setUserDetail(dataResult.data.result);
-		} catch (error: any) {
-			console.error("Error verifying user:", error);
-		}
+		const dataResult = await axios.post("/api/verify-user", {
+			user: user,
+		});
+		setUserDetail(dataResult.data.result);
 	};
 
 	return (
