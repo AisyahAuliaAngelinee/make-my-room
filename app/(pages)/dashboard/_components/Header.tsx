@@ -8,7 +8,7 @@ import { UserDetailContext } from "@/app/_context/UserDetailContext";
 import { Button } from "@/components/ui/button";
 
 export default function Header() {
-	const { userDetail, setUserDetail } = useContext(UserDetailContext);
+	const { userDetail, setUserDetail } = useContext<any>(UserDetailContext);
 
 	return (
 		<div className="p-5 shadow-sm flex justify-between items-center">

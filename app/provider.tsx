@@ -16,7 +16,7 @@ type UserDetail = {
 export default function Provider({ children }: { children: React.ReactNode }) {
 	const { user } = useUser();
 
-	const [userDetail, setUserDetail] = useState<UserDetail | undefined>();
+	const [userDetail, setUserDetail] = useState<UserDetail>();
 
 	useEffect(() => {
 		user && VerifyUser();
