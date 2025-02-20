@@ -1,6 +1,10 @@
+"use client";
+
 import ImageSelection from "./_component/ImageSelection";
 
 export default function CreateNew() {
+	const onHandleInputChange = (value: any, fieldName: string) => {};
+
 	return (
 		<div>
 			<h1 className="font-bold text-4xl text-blue-600 text-center">
@@ -13,7 +17,9 @@ export default function CreateNew() {
 
 			<div className="grid grid-cols-1 md:grid-cols-2 items-center justify-center mt-10">
 				{/* Image */}
-				<ImageSelection />
+				<ImageSelection
+					selectedImage={(value: any) => onHandleInputChange(value, "image")}
+				/>
 
 				{/* Form input */}
 			</div>
