@@ -5,6 +5,7 @@ import { MdMeetingRoom } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
 import { useContext } from "react";
 import { UserDetailContext } from "@/app/_context/UserDetailContext";
+import { Button } from "@/components/ui/button";
 
 export default function Header() {
 	const { userDetail, setUserDetail } = useContext(UserDetailContext);
@@ -18,6 +19,9 @@ export default function Header() {
 				<h2 className="font-bold text-lg">Make My Room</h2>
 			</div>
 
+			<Button variant="ghost" className="rounded-full text-blue-700">
+				Buy more credits
+			</Button>
 			<div className="flex gap-4 items-center">
 				<div className="flex items-center gap-2 p-1 bg-slate-200 px-3 rounded-full">
 					<FaStar className="text-orange-400 w-[20px] h-[20px]" />

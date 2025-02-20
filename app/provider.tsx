@@ -16,7 +16,7 @@ type UserDetail = {
 export default function Provider({ children }: { children: React.ReactNode }) {
 	const { user } = useUser();
 
-	const [userDetail, setUserDetail] = useState<UserDetail>();
+	const [userDetail, setUserDetail] = useState<UserDetail | undefined>();
 
 	useEffect(() => {
 		user && VerifyUser();
@@ -26,10 +26,14 @@ export default function Provider({ children }: { children: React.ReactNode }) {
 	 * Verify user
 	 */
 	const VerifyUser = async () => {
-		const dataResult = await axios.post("./api/verify-user", {
-			user: user,
-		});
-		setUserDetail(dataResult.data.result);
+		try {
+			const dataResult = await axios.post("./api/verify-user", {
+				user: user,
+			});
+			setUserDetail(dataResult.data.result);
+		} catch (error: any) {
+			console.error("Error verifying user:", error);
+		}
 	};
 
 	return (
