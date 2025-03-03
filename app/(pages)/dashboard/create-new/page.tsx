@@ -22,8 +22,13 @@ export default function CreateNew() {
 
 	const GenerateAiImage = async () => {
 		const rawImageUrl = await SaveRawImageToCloudinary();
-		// const result = await axios.post("/api/upload", formData);
-		// console.log("result => ", result);
+		const result = await axios.post("/api/upload", {
+			imageUrl: rawImageUrl,
+			roomType: formData?.roomType,
+			designType: formData?.designType,
+			additionalReq: formData?.additionalReq,
+		});
+		console.log("result => ", result);
 	};
 
 	const SaveRawImageToCloudinary = async () => {
