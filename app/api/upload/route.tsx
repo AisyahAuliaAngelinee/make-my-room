@@ -1,11 +1,58 @@
+import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
+import Replicate from "replicate";
+
+const replicate = new Replicate({
+	auth: process.env.NEXT_PUBLIC_REPLICATE_API_KEY,
+});
+
+const myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
 
 export async function POST(req: NextRequest) {
 	const { imageUrl, roomType, designType, additionalReq } = await req.json();
 
 	// Convert image into AI Image
-	// Convert Output URL to Base64 Image
-	// Save base64 to Firebase
-	// Save all to DB
-	return NextResponse.json({ result: "Hello" });
+	try {
+		const input = JSON.stringify({
+			key: "",
+			init_image: imageUrl,
+			prompt:
+				"A " +
+				roomType +
+				" with a " +
+				designType +
+				" style interior " +
+				additionalReq,
+			negative_prompt: "bad quality",
+			seed: 0,
+			guidance_scale: 8,
+			strength: 0.99,
+			num_inference_steps: 51,
+			base64: false,
+			temp: false,
+			webhook: null,
+			track_id: null,
+		});
+
+		const requestOptions: any = {
+			method: "POST",
+			headers: myHeaders,
+			body: input,
+			redirect: "follow",
+		};
+
+		const output = await fetch(
+			"https://modelslab.com/api/v6/interior/make",
+			requestOptions
+		);
+		console.log("output -> ", output);
+		return NextResponse.json({ result: output });
+
+		// Convert Output URL to Base64 Image
+		// Save base64 to Firebase
+		// Save all to DB
+	} catch (error) {
+		return NextResponse.json({ error: error });
+	}
 }
