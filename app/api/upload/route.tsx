@@ -11,9 +11,26 @@ myHeaders.append("Content-Type", "application/json");
 
 export async function POST(req: NextRequest) {
 	const { imageUrl, roomType, designType, additionalReq } = await req.json();
+	const prompt = `A ${roomType} with a ${designType} style interior. ${additionalReq}`;
 
 	// Convert image into AI Image
 	try {
+		// const input = {
+		// 	image: imageUrl,
+		// 	prompt:
+		// 		"A " +
+		// 		roomType +
+		// 		" with a " +
+		// 		designType +
+		// 		" style interior " +
+		// 		additionalReq,
+		// };
+		// console.log("input -> ", input);
+		// const output = await replicate.run(
+		// 	"adirik/interior-design:76604baddc85b1b4616e1c6475eca080da339c8875bd4996705440484a6eac38",
+		// 	{ input }
+		// );
+
 		const input = JSON.stringify({
 			key: "",
 			init_image: imageUrl,
@@ -43,9 +60,10 @@ export async function POST(req: NextRequest) {
 		};
 
 		const output = await fetch(
-			"https://modelslab.com/api/v6/interior/make",
+			"https://modelslab.com/api/v5/interior",
 			requestOptions
 		);
+
 		console.log("output -> ", output);
 		return NextResponse.json({ result: output });
 
